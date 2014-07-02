@@ -1,0 +1,63 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|center_horizontal"
+                tools:context="it_ebook.avenwu.com.itebooks.SearchHome">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/it_ebooks"
+        android:id="@+id/textView2"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="#008000"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#555555"
+        android:gravity="center"
+        android:text="@string/it_ebooks_search_engine"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:layout_below="@+id/textView2"
+        android:id="@+id/textView3"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/textView3"
+        android:id="@+id/linearLayout">
+
+        <EditText
+            android:layout_weight="100"
+            android:layout_width="0dp"
+            android:minWidth="250dp"
+            android:singleLine="true"
+            android:layout_height="wrap_content"
+            android:id="@+id/edit_query_content"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:id="@+id/btn_search"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tv_warn"
+        android:textColor="#ff0000"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"/>
+
+</RelativeLayout>
