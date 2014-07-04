@@ -15,7 +15,18 @@
         <item>Recent</item>
         <item>About</item>
     </string-array>
-
+    <string-array name="auto_complete_items">
+        <item>android</item>
+        <item>java</item>
+        <item>ios</item>
+        <item>swift</item>
+        <item>php</item>
+        <item>python</item>
+        <item>lips</item>
+        <item>data</item>
+        <item>gson</item>
+        <item>c++</item>
+    </string-array>
     <string name="warn_empty_content">It seems you haven\'t input anything.</string>
     <string name="warn_length_reach_limit">Query content should less than 50 characters!</string>
     <string name="title_activity_detail">DetailActivity</string>

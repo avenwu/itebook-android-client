@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
-import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,9 +14,7 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -147,37 +144,13 @@ public class BooksFragmentFragment extends Fragment implements AbsListView.OnIte
 
     @Override
     public Loader<BooksResult> onCreateLoader(int id, Bundle args) {
-        return new AsyncTaskLoader<BooksResult>(getActivity()) {
-            @Override
-            protected void onStartLoading() {
-                super.onStartLoading();
-                forceLoad();
-            }
+        return new BaseLoader<BooksResult>(getActivity()) {
 
             @Override
             public BooksResult loadInBackground() {
                 if (getArguments() == null || TextUtils.isEmpty(getArguments().getString("data")))
                     return null;
                 return ApiService.getService().queryBooksonPage(getArguments().getString("data"), mPages);
-            }
-
-            @Override
-            public void deliverResult(BooksResult data) {
-                if (isStarted()) {
-                    super.deliverResult(data);
-                }
-            }
-
-            @Override
-            protected void onReset() {
-                super.onReset();
-                onStopLoading();
-            }
-
-            @Override
-            protected void onStopLoading() {
-                super.onStopLoading();
-                cancelLoad();
             }
         };
     }
