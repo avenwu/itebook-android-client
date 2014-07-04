@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SearchHome extends Fragment {
 
@@ -45,6 +46,7 @@ public class SearchHome extends Fragment {
                     mWarnText.setText("");
                     mWarnText.setVisibility(View.GONE);
                     mListener.onFragmentInteraction(SearchHome.this, mEditView.getText().toString().trim());
+//                    updateResult(mEditView.getText().toString().trim());
                 }
             }
         });
@@ -59,6 +61,15 @@ public class SearchHome extends Fragment {
             throw new ClassCastException(activity.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+    }
+
+    private void updateResult(String data) {
+        Fragment list = new BooksFragmentFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("data", data);
+        list.setArguments(bundle);
+        Toast.makeText(getActivity(), "query received for:" + data, Toast.LENGTH_SHORT).show();
+//        getChildFragmentManager().beginTransaction().replace(R.id.child_container, list).commit();
     }
 
     @Override

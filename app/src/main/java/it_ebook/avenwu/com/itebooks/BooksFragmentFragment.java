@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.Loader;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,11 @@ import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import it_ebook.avenwu.com.itebooks.dummy.DummyContent;
+import com.squareup.picasso.Picasso;
+
 
 public class BooksFragmentFragment extends Fragment implements AbsListView.OnItemClickListener, LoaderManager.LoaderCallbacks<BooksResult> {
 
@@ -65,7 +66,6 @@ public class BooksFragmentFragment extends Fragment implements AbsListView.OnIte
         mListView = (AbsListView) view.findViewById(android.R.id.list);
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
-
         return view;
     }
 
@@ -106,11 +106,13 @@ public class BooksFragmentFragment extends Fragment implements AbsListView.OnIte
                 if (book != null) {
                     holder.title.setText(book.getTitle());
                     holder.description.setText(book.getDescription());
+                    Picasso.with(getActivity()).load(book.getImage()).into(holder.image);
                 }
                 return convertView;
             }
         };
         mListView.setAdapter(mAdapter);
+
         getLoaderManager().initLoader(0, null, this);
     }
 
@@ -124,7 +126,7 @@ public class BooksFragmentFragment extends Fragment implements AbsListView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mAdapter.getItem(position)) {
-            Intent intent = new Intent();
+            Intent intent = new Intent(getActivity(), DetailActivity.class);
             intent.putExtra("book", (Book) mAdapter.getItem(position));
             startActivity(intent);
         }
@@ -154,6 +156,8 @@ public class BooksFragmentFragment extends Fragment implements AbsListView.OnIte
 
             @Override
             public BooksResult loadInBackground() {
+                if (getArguments() == null || TextUtils.isEmpty(getArguments().getString("data")))
+                    return null;
                 return ApiService.getService().queryBooksonPage(getArguments().getString("data"), mPages);
             }
 
