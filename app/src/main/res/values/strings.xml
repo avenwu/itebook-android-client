@@ -31,5 +31,11 @@
     <string name="warn_length_reach_limit">Query content should less than 50 characters!</string>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="hello_world">Hello world!</string>
-
+    <string name="download">Download</string>
+    <string name="download_failed">Download failed</string>
+    <string name="download_sucess">Download completed</string>
+    <string name="download_in_progress">Download in progress</string>
+    <string name="download_pending">Download pendding</string>
+    <string name="download_paused">Download is paused</string>
+    <string name="download_is_nowhere_in_sight">Download is not found</string>
 </resources>
