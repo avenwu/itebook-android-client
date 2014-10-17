@@ -4,6 +4,9 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Administrator on 2014/7/4.
  */
@@ -14,17 +17,26 @@ public class Utils {
 
     public static void addSearchItem(Context context, String... data) {
         SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-        StringBuffer buffer = new StringBuffer(sp.getString(KEY_SEARCH_HISTORY, ""));
+        StringBuilder buffer = new StringBuilder(sp.getString(KEY_SEARCH_HISTORY, ""));
         for (String item : data) {
-            buffer.append("||").append(item);
-            Log.d(TAG, "append search item:" + item);
+            if (!buffer.toString().contains(item)) {
+                buffer.append("||").append(item);
+                Log.d(TAG, "append search item:" + item);
+            }
         }
-        sp.edit().putString(KEY_SEARCH_HISTORY, buffer.toString()).commit();
+        sp.edit().putString(KEY_SEARCH_HISTORY, buffer.toString()).apply();
     }
 
     public static String[] getSearchItems(Context context) {
         SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
-        String items = sp.getString(KEY_SEARCH_HISTORY, "");
-        return items.split("\\|\\|");
+        List<String> temp = new ArrayList<String>();
+        for (String item : sp.getString(KEY_SEARCH_HISTORY, "").split("\\|\\|")) {
+            if (!temp.contains(item)) {
+                temp.add(item);
+            }
+        }
+        String[] result = new String[temp.size()];
+        temp.toArray(result);
+        return result;
     }
 }

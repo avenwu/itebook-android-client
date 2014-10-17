@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class SearchHome extends Fragment implements LoaderManager.LoaderCallbacks<String[]> {
 
@@ -105,15 +104,6 @@ public class SearchHome extends Fragment implements LoaderManager.LoaderCallback
 
     @Override
     public void onLoaderReset(Loader<String[]> loader) {
-    }
-
-    private void updateResult(String data) {
-        Fragment list = new BooksFragmentFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString("data", data);
-        list.setArguments(bundle);
-        Toast.makeText(getActivity(), "query received for:" + data, Toast.LENGTH_SHORT).show();
-//        getChildFragmentManager().beginTransaction().replace(R.id.child_container, list).commit();
     }
 
     @Override

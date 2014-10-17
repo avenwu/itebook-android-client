@@ -55,6 +55,8 @@ public class DetailActivity extends ActionBarActivity implements LoaderManager.L
             @Override
             public void onClick(View v) {
 //                download(bookDetail.getDownload());
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(bookDetail.getDownload()));
+                startActivity(intent);
             }
         });
         download.setEnabled(bookDetail != null);
